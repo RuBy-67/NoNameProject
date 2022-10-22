@@ -1,0 +1,40 @@
+const rpc = require("discord-rpc");
+const cli = new rpc.Client({ transport: "ipc" });
+
+cli.on("ready", () => {
+  cli.request("SET_ACTIVITY", {
+    pid: process.pid,
+
+    activity: {
+      // 2ème ligne du RP (Minimum 2 caractères)
+      details: "Esport Organisation",
+      // 3ème ligne du RP (Minimum 2 caractères)
+      state: "Clash of Clans Tournaments",
+
+      assets: {
+        // Grande image avec texte non cliquable (minuscule seulement)
+        // large_image: "original",
+        //large_text: "Hellloo <3",
+        // Petite image avec texte non cliquable (minuscule seul_ement)
+        //small_image: "botlogo",
+        //small_text: "Clash of Base",
+      },
+      // Bouton(s) du RP : Maximum 2 - Minimum 0
+      // (Vous ne pouvez pas cliquer sur vos propres boutons)
+      buttons: [
+        // Bouton n'1 | (Ajouter des // devant pour les désactiver : "// {label : [...]" )
+        {
+          label: "Add Our Bot",
+          url: "https://discord.com/oauth2/authorize?client_id=661316233848684544&scope=bot&permissions=2113404159",
+        },
+        { label: "Join Black Widow", url: "https://discord.gg/d963sGx" },
+      ],
+    },
+  });
+
+  console.log("Opérationnel !");
+});
+
+// ClientID à récupérer sur : https://discord.com/developers/applications/ (Applications ID)
+// Le nom de votre application correspondra à la première ligne du RP (En gras)
+cli.login({ clientId: "1033356418801221694" }).catch(console.error);
