@@ -2,14 +2,14 @@ const Discord = require("discord.js");
 const intents = new Discord.IntentsBitField(3276799);
 const bot = new Discord.Client({ intents });
 const loadcommands = require("./Loaders/loadCommands");
-const loadEvents = require("./Loaders/LoadEvent");
+const loadEvent = require("./Loaders/LoadEvent");
 const config = require("../../json/config.json");
 
 bot.commands = new Discord.Collection();
 
 bot.login(config.token_Information);
 loadcommands(bot);
-loadEvents(bot);
+loadEvent(bot);
 
 bot.on("messageCreate", async (message) => {
   if (message.content === "!ping")
